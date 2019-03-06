@@ -22,6 +22,7 @@ public class Snake extends JFrame implements KeyListener, WindowListener {
 	boolean start = false;
 	String direction = "left";
 	int score = 0;
+	int highScore = 0;
 
 	public static void main(String[] args) {
 		Snake game = new Snake("Snake");
@@ -78,9 +79,9 @@ public class Snake extends JFrame implements KeyListener, WindowListener {
 		add(board, BorderLayout.CENTER);
 		remove(scoreArea);
 		if (!start)
-			scoreArea = new JTextArea("          Score: " + score + "   |   Press any key to restart!");
+			scoreArea = new JTextArea("                       Score: " + score + " | High Score: " + highScore + "   |   Press any key to restart!");
 		else
-			scoreArea = new JTextArea("Score: " + score);
+			scoreArea = new JTextArea("Score: " + score + " | High Score: " + highScore);
 		scoreArea.setEditable(false);
 
 		scoreArea.setFocusable(false);
@@ -93,6 +94,8 @@ public class Snake extends JFrame implements KeyListener, WindowListener {
 			for (int j = 0; j < text[i].length; j++)
 				text[i][j] = 0;
 		snake.clear();
+		if (score > highScore)
+			highScore = score;
 		score = 0;
 		snake.add(0, new SnakeCell(11, 11, "left"));
 		text[(int) (20 * Math.random() + 1)][(int) (20 * Math.random() + 1)] = -1;
